@@ -2,29 +2,31 @@ import { Container, Sprite, Texture } from 'pixi.js';
 import { MySprite, MyContainer } from '../types';
 
 
-export function createKey(keyTextures: {[key: string]: Texture}, button: {x: number, y: number}, key: string) {
-
-  const base: MySprite = Sprite.from(keyTextures[`${key}/${key}.png`]);
-  base.zIndex = 4;
-
-  const hover: MySprite = Sprite.from(keyTextures[`${key}/${key}-hover.png`]);
-  hover.zIndex = 3;
-
-  const clicked: MySprite = Sprite.from(keyTextures[`${key}/${key}-clicked.png`]);
-  clicked.zIndex = 2;
-
-  const disabled: MySprite = Sprite.from(keyTextures[`${key}/${key}-disabled.png`]);
-  disabled.zIndex =  1;
+export function createKey(keyTextures: {[key: string]: Texture}, button: {x: number, y: number}, path: string) {
 
   const container: MyContainer = new Container();
+
+  const base: MySprite = Sprite.from(keyTextures[`${path}/${path}.png`]);
+  base.zIndex = 4;
+
+  const hover: MySprite = Sprite.from(keyTextures[`${path}/${path}-hover.png`]);
+  hover.zIndex = 3;
+
+  const clicked: MySprite = Sprite.from(keyTextures[`${path}/${path}-clicked.png`]);
+  clicked.zIndex = 2;
+
+  if (`${path}/${path}-disabled.png` in keyTextures) {
+    const disabled: MySprite = Sprite.from(keyTextures[`${path}/${path}-disabled.png`]);
+    disabled.zIndex =  1;
+    container.addChild(disabled);
+  }
+
+  container.addChild(clicked, hover, base);
   container.pivot.set(base.width / 2, base.height / 2);
   container.x = button.x;
   container.y = button.y;
-  container.id = key;
+  container.id = path;
   container.sortableChildren = true;
-  container.addChild(disabled, clicked, hover, base);
-  console.log('container.children', container.children);
-
   container.interactive = true;
   container.cursor = 'pointer';
   container.on('pointerover', () => {

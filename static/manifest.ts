@@ -28,5 +28,11 @@ export const manifest: ResolverManifest = {
         }
       ]
     },
+    {
+      name: "fonts",
+      assets: {
+        "bahnschrift": "font/bahnschrift.ttf"
+      }
+    }
   ]
 }

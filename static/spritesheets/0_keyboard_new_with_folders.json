@@ -352,7 +352,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":137,"h":56},
 	"sourceSize": {"w":137,"h":56}
 },
-"btn_plus/btn_plus_clicked.png":
+"btn_plus/btn_plus-clicked.png":
 {
 	"frame": {"x":1757,"y":0,"w":137,"h":56},
 	"rotated": false,
@@ -408,9 +408,17 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":336,"h":338},
 	"sourceSize": {"w":336,"h":338}
 },
-"btn_stop/btn_stop.png":
+"btn_stop/btn_stop-hover.png":
 {
 	"frame": {"x":1344,"y":1273,"w":336,"h":338},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":336,"h":338},
+	"sourceSize": {"w":336,"h":338}
+},
+"btn_stop/btn_stop.png":
+{
+	"frame": {"x":1680,"y":1273,"w":336,"h":338},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":336,"h":338},
@@ -448,7 +456,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":322,"h":221},
 	"sourceSize": {"w":322,"h":221}
 },
-"line_5/line_5-hover.png":
+"line_5/line_5-on.png":
 {
 	"frame": {"x":1288,"y":493,"w":322,"h":221},
 	"rotated": false,
@@ -553,6 +561,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2016,"h":2011},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:0c5718e16a156fdce790a811c708e523:732c907cce4e7c9939445cb929af0d6e:bfc7e1d57b2b0a1dd5815c9554e41bcd$"
+	"smartupdate": "$TexturePacker:SmartUpdate:7d757a8cb151676b4ea0bf54a9706ecc:bfaf718536ee61688c1ddc54f8b90e36:bfc7e1d57b2b0a1dd5815c9554e41bcd$"
 }
 }
