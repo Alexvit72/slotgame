@@ -4,17 +4,29 @@ export const manifest: ResolverManifest = {
   bundles: [
     {
       name : "scene",
-      assets: {
-        "panel" : "panel_bg.png",
-        "main_bg" : "Rabbit Illusion/main/main_bg.png",
-        "logo" : "Rabbit Illusion/main/logo.png",
-      }
+      assets: [
+        {
+          name: "panel",
+          srcs: "panel_bg.png"
+        },
+        {
+          name: "main_bg",
+          srcs: "Rabbit Illusion/main/main_bg.png"
+        },
+        {
+          name: "logo",
+          srcs: "Rabbit Illusion/main/logo.png"
+        },
+      ],
     },
     {
       name : "keys",
-      assets: {
-        "keyboard" : "spritesheets/0_keyboard_new.json",
-      }
+      assets: [
+        {
+          name: "keyboard",
+          srcs: "spritesheets/0_keyboard_new_with_folders.json"
+        }
+      ]
     },
   ]
 }

@@ -1,6 +1,8 @@
 import { Application, Sprite, Assets } from 'pixi.js';
 import { manifest } from '../static/manifest';
 import { keyboardButtons } from './utils';
+//import { MySprite } from './types';
+import { createKey } from './components/key';
 
 const app = new Application({
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
@@ -32,16 +34,11 @@ initializeLoader().then((textures) => {
 
 	app.stage.addChild(main_bg, logo, panel);
 
-	function createSprite(button: {x: number, y: number}, key: string) {
-		const sprite: Sprite = Sprite.from(textures.keys.keyboard.textures[`${key}.png`]);
-		sprite.anchor.set(0.5);
-		sprite.x = button.x;
-		sprite.y = button.y;
-		app.stage.addChild(sprite);
+	const keyTextures = textures.keys.keyboard.textures;
+	for (let [key, coord] of Object.entries(keyboardButtons)) {
+		if (!key.startsWith('line_') && !key.startsWith('btn_plus') && !key.startsWith('btn_minus')) {
+			app.stage.addChild(createKey(keyTextures, coord, key))
+		}
 	}
-
-	Object.entries(keyboardButtons).forEach(([key, button]) => {
-		createSprite(button, key);
-	});
 
 });
