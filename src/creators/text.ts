@@ -1,10 +1,10 @@
 import { Text } from 'pixi.js';
-import { MyText, TextData } from '../types';
+import { TextData } from '../types';
 
 
 export function createText(textData: TextData, path: string) {
 
-  const text: MyText = new Text(textData.string, {
+  const text = new Text(textData.string.toUpperCase(), {
     fontFamily: 'bahnschrift',
     fontSize: textData.size,
     fontWeight: textData.weight,
@@ -15,7 +15,7 @@ export function createText(textData: TextData, path: string) {
   text.anchor.set(0.5);
   text.x = textData.x;
   text.y = textData.y;
-  text.id = path;
+  text.name = path;
 
   return text;
 
