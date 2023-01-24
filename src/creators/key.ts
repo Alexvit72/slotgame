@@ -38,10 +38,15 @@ export function createKey(keyTextures: {[key: string]: Texture}, button: {x: num
     hover.zIndex = 3;
     clicked.zIndex = 5;
   });
-  container.on('pointerup', () => {
-    hover.zIndex = 5;
-    clicked.zIndex = 2;
-  });
+  container
+    .on('pointerup', () => {
+      hover.zIndex = 5;
+      clicked.zIndex = 2;
+    })
+    .on('pointerupoutside', () => {
+      hover.zIndex = 3;
+      clicked.zIndex = 2;
+    });
 
   return container;
 

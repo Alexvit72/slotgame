@@ -7,8 +7,14 @@ import { createLine } from './creators/line';
 import { createText } from './creators/text';
 
 //window.PIXI = PIXI;
-let start = false;
-let line = '1';
+let starts: { [key: string]: boolean } = {
+	reel_1: false,
+	reel_2: false,
+	reel_3: false,
+	reel_4: false,
+	reel_5: false
+};
+let line = '';
 let bet = '1';
 let balance = '';
 let free_games = 0;
@@ -85,11 +91,11 @@ initializeLoader().then((textures) => {
 				break;
 		}
 
-		app.ticker.add(() => {
-			if(start) {
+		app.ticker.add((delta) => {
+			if(starts[`${reel.name}`]) {
 				reel.children.forEach((child) => {
 					//console.log('child', child);
-					child.y += 80;
+					child.y += (80 - delta);
 					if(child.y > 1814) {
 						child.destroy();
 						const newSlot = Sprite.from(textures.slots[`slot_${Math.floor(1 + Math.random() * 10)}`]);
@@ -134,16 +140,36 @@ initializeLoader().then((textures) => {
 
 	app.stage.addChild(main_bg, logo, field_full, panel);
 
+	const linesContainer = new Container();
+	app.stage.addChild(linesContainer);
 	const keyTextures = textures.keys.keyboard.textures;
 	for (let [key, coord] of Object.entries(keyboardButtons)) {
 		if (key.startsWith('line_')) {
-			app.stage.addChild(createLine(keyTextures, coord, key))
+			linesContainer.addChild(createLine(keyTextures, coord, key))
 		} else {
 			app.stage.addChild(createKey(keyTextures, coord, key))
 		}
 	}
 
-	app.stage.getChildByName('btn_start').on('pointerdown', () => {start = !start});
+	for (let child of linesContainer.children) {
+		child.on('pointerdown', () => {
+			linesContainer.children.forEach((child) => {
+				child.getChildByName('on').visible = false;
+			});
+			child.getChildByName('on').visible = true;
+			line = child.name[child.name.length - 1];
+		});
+	}
+
+	app.stage.getChildByName('btn_start').on('pointerdown', () => {
+		let i = 1;
+		for (let key in starts) {
+			starts[key] = true;
+			setTimeout(() => {
+				starts[key] = false;
+			}, (i++) * 5000);
+		}
+	});
 
 	for (let [key, textData] of Object.entries(texts)) {
 		app.stage.addChild(createText(textData, key));

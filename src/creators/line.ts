@@ -6,6 +6,7 @@ export function createLine(keyTextures: {[key: string]: Texture}, button: {x: nu
   const off = Sprite.from(keyTextures[`${path}/${path}.png`]);
 
   const on = Sprite.from(keyTextures[`${path}/${path}-on.png`]);
+  on.name = 'lineOn';
   on.visible = false;
 
   const container = new Container();
